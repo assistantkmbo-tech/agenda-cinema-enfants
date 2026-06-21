@@ -1,0 +1,16 @@
+{
+  "title": "OLIVIA",
+  "director": "Irene Iborra Rizo",
+  "duration": 71,
+  "ageMin": 8,
+  "synopsis": "À 12 ans, Olivia voit son quotidien bouleversé du jour au lendemain. Elle va devoir s'habituer à une nouvelle vie plus modeste et veiller seule sur son petit frère Tim. Mais, heureusement, leur rencontre avec des voisins chaleureux et hauts en couleur va transformer leur monde en un vrai film d'aventure ! Ensemble, ils vont faire de chaque défi un jeu et de chaque journée un moment inoubliable.",
+  "status": "en_salle",
+  "dateLabel": "ACTUELLEMENT AU CINÉMA",
+  "coupDeCoeur": true,
+  "poster": "/images/poster-olivia.jpg",
+  "heroImage": "/images/hero.jpg",
+  "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=302424.html",
+  "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20626029&cfilm=302424.html",
+  "seancesUrl": "https://www.allocine.fr/seance/film-302424/",
+  "order": 1
+}

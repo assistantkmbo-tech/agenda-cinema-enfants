@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  director: string;
+  duration: number;
+  ageMin: number;
+  synopsis: string;
+  dateLabel: string;
+  status: 'en_salle' | 'bientot';
+  coupDeCoeur?: boolean;
+  poster: string;
+  allocineUrl?: string;
+  trailerUrl?: string;
+  seancesUrl?: string;
+}
+
+const {
+  title, director, duration, ageMin, synopsis,
+  dateLabel, status,
+  coupDeCoeur = false,
+  poster, allocineUrl, trailerUrl, seancesUrl,
+} = Astro.props;
+
+const isPreview = status === 'bientot';
+---
+
+<div class:list={['film', { 'film--preview': isPreview }]}>
+
+  {coupDeCoeur && (
+    <img class="film-favorite" src="/images/favorite.png" alt="Coup de coeur" />
+  )}
+
+  <div class="film-img">
+    <a href={allocineUrl ?? '#'} target="_blank" rel="noopener">
+      <img
+        class="film-poster"
+        src={poster}
+        alt={`Affiche du film : ${title}`}
+        loading="lazy"
+      />
+    </a>
+  </div>
+
+  <div class="film-informations">
+
+    <span class="film-date">{dateLabel}</span>
+
+    <span class="film-age">
+      <span>Dès</span>
+      <span class="film-age__num"><strong>{ageMin}</strong> ans</span>
+    </span>
+
+    <h4 class="film-title">{title}</h4>
+    <span class="film-subtitle">De {director} - {duration} min</span>
+
+    <div class="film-description">
+      <p>{synopsis}</p>
+    </div>
+
+    <div class="film-btn">
+      {trailerUrl && (
+        <a href={trailerUrl} class="btn-trailer" target="_blank" rel="noopener">
+          Voir la bande annonce
+        </a>
+      )}
+      {seancesUrl && (
+        <a href={seancesUrl} class="btn-seances" target="_blank" rel="noopener">
+          Voir les séances
+        </a>
+      )}
+    </div>
+
+  </div>
+</div>

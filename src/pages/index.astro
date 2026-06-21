@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import FilmCard from '../components/FilmCard.astro';
+
+const allFilms = await getCollection('films');
+const sorted = allFilms.sort((a, b) => a.data.order - b.data.order);
+
+const enSalle = sorted.filter(f => f.data.status === 'en_salle');
+const bientot = sorted.filter(f => f.data.status === 'bientot');
+
+const heroFilm = enSalle[0];
+const heroImage = heroFilm?.data.heroImage ?? heroFilm?.data.poster;
+---
+
+<Layout>
+
+  <Header />
+
+  <main
+    style={heroImage ? `background-image: url('${heroImage}'); background-position: unset;` : ''}
+  >
+
+    <!-- INTRO -->
+    <section id="intro" class="section-intro">
+      <div class="container">
+        <h1 class="section-intro__title">
+          LES FILMS POUR ENFANTS AU CINÉMA
+        </h1>
+        <h2 class="section-intro__subtitle">
+          Inscrivez-vous à notre newsletter et soyez au courant
+          des plus belles sorties pour vos enfants.
+        </h2>
+      </div>
+      <div class="container section-intro__inner">
+        <div class="section-intro__infos"></div>
+      </div>
+    </section>
+
+    <!-- FILMS À L'AFFICHE -->
+    <section id="film-affiche" class="filmslist">
+      <div class="container">
+        <div class="films">
+          <div class="films-content">
+
+            {enSalle.map(film => (
+              <FilmCard
+                title={film.data.title}
+                director={film.data.director}
+                duration={film.data.duration}
+                ageMin={film.data.ageMin}
+                synopsis={film.data.synopsis}
+                dateLabel={film.data.dateLabel}
+                status={film.data.status}
+                coupDeCoeur={film.data.coupDeCoeur}
+                poster={film.data.poster}
+                allocineUrl={film.data.allocineUrl}
+                trailerUrl={film.data.trailerUrl}
+                seancesUrl={film.data.seancesUrl}
+              />
+            ))}
+
+            {bientot.map(film => (
+              <FilmCard
+                title={film.data.title}
+                director={film.data.director}
+                duration={film.data.duration}
+                ageMin={film.data.ageMin}
+                synopsis={film.data.synopsis}
+                dateLabel={film.data.dateLabel}
+                status={film.data.status}
+                coupDeCoeur={film.data.coupDeCoeur}
+                poster={film.data.poster}
+                allocineUrl={film.data.allocineUrl}
+                trailerUrl={film.data.trailerUrl}
+                seancesUrl={film.data.seancesUrl}
+              />
+            ))}
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIENTÔT AU CINÉMA -->
+    <section id="soon" class="soon">
+      <div class="container">
+        <h1 class="title">Bientôt au cinéma</h1>
+        <div class="movies">
+          <div class="content">
+            {bientot.map(film => (
+              <a
+                href={film.data.allocineUrl ?? film.data.seancesUrl ?? '#'}
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="item">
+                  <span class="date">{film.data.dateLabel}</span>
+                  <img
+                    class="poster"
+                    src={film.data.poster}
+                    alt={`Affiche : ${film.data.title}`}
+                    loading="lazy"
+                  />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</Layout>

@@ -1,0 +1,16 @@
+{
+  "title": "FANTASTIQUE",
+  "director": "Marjolijn Prins",
+  "duration": 71,
+  "ageMin": 8,
+  "synopsis": "Fanta, une contorsionniste de 14 ans, vit à Conakry, en Guinée. À force de jongler quotidiennement entre l'école, le soutien à sa famille et ses entraînements au sein de la troupe où elle est l'une des rares filles, Fanta commence à douter de son rêve le plus cher : participer à la prochaine grande tournée du cirque acrobatique Amoukanama.",
+  "status": "bientot",
+  "dateLabel": "4 MARS",
+  "releaseDate": "2025-03-04",
+  "coupDeCoeur": false,
+  "poster": "/images/poster-fantastique.png",
+  "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=1000035100.html",
+  "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20632756&cfilm=1000035100.html",
+  "seancesUrl": "https://www.allocine.fr/seance/film-1000035100/",
+  "order": 6
+}

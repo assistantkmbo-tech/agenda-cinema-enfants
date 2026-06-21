@@ -1,0 +1,128 @@
+backend:
+  name: github
+  repo: TON_COMPTE_GITHUB/agenda-cinema-enfants   # ← à remplacer
+  branch: main
+  auth_endpoint: https://api.sveltia.app/auth      # auth hébergée par Sveltia, gratuite
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+locale: fr
+
+collections:
+  - name: films
+    label: Films
+    label_singular: Film
+    folder: src/content/films
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{dateLabel}}"
+    sortable_fields: [order, title, dateLabel]
+    view_groups:
+      - label: Statut
+        field: status
+        pattern: "^en_salle$"
+      - label: Statut
+        field: status
+        pattern: "^bientot$"
+
+    fields:
+      - label: Titre
+        name: title
+        widget: string
+        hint: "En MAJUSCULES, ex : OLIVIA"
+
+      - label: Réalisateur(s)
+        name: director
+        widget: string
+        hint: "Prénom Nom (sans « De »)"
+
+      - label: Durée (minutes)
+        name: duration
+        widget: number
+        value_type: int
+        min: 1
+        max: 300
+
+      - label: Âge minimum
+        name: ageMin
+        widget: number
+        value_type: int
+        min: 1
+        max: 18
+        hint: "Ex : 3, 6, 8"
+
+      - label: Synopsis
+        name: synopsis
+        widget: text
+
+      - label: Statut
+        name: status
+        widget: select
+        options:
+          - { label: "Actuellement au cinéma", value: "en_salle" }
+          - { label: "Bientôt au cinéma", value: "bientot" }
+        default: bientot
+
+      - label: Libellé date
+        name: dateLabel
+        widget: string
+        hint: "Affiché sur la carte. Ex : « ACTUELLEMENT AU CINÉMA » ou « 4 FÉVRIER »"
+
+      - label: Date de sortie
+        name: releaseDate
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: DD/MM/YYYY
+        time_format: false
+        required: false
+        hint: "Pour les films à venir seulement"
+
+      - label: Coup de cœur
+        name: coupDeCoeur
+        widget: boolean
+        default: false
+
+      - label: Affiche (poster)
+        name: poster
+        widget: image
+        media_folder: /public/images/uploads
+        public_folder: /images/uploads
+        hint: "Format 3:4 recommandé (120×160 px minimum)"
+
+      - label: Image héro
+        name: heroImage
+        widget: image
+        media_folder: /public/images/uploads
+        public_folder: /images/uploads
+        required: false
+        hint: "Image de fond de la section intro (1920×1080 recommandé) — uniquement pour le 1er film en salle"
+
+      - label: Lien Allociné (film)
+        name: allocineUrl
+        widget: string
+        required: false
+        hint: "https://www.allocine.fr/film/..."
+
+      - label: Lien bande-annonce
+        name: trailerUrl
+        widget: string
+        required: false
+        hint: "https://www.allocine.fr/video/..."
+
+      - label: Lien séances
+        name: seancesUrl
+        widget: string
+        required: false
+        hint: "https://www.allocine.fr/seance/..."
+
+      - label: Ordre d'affichage
+        name: order
+        widget: number
+        value_type: int
+        min: 1
+        hint: "1 = premier affiché"

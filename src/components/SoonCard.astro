@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  director: string;
+  duration: number;
+  ageMin: number;
+  dateLabel: string;
+  coupDeCoeur?: boolean;
+  poster: string;
+  allocineUrl?: string;
+  seancesUrl?: string;
+}
+
+const {
+  title, director, duration, ageMin,
+  dateLabel, coupDeCoeur = false,
+  poster, allocineUrl, seancesUrl,
+} = Astro.props;
+---
+
+<div class="soon-item">
+  {coupDeCoeur && (
+    <img class="film-favorite soon-fav" src="/images/favorite.png" alt="Coup de cœur" />
+  )}
+  <a href={allocineUrl ?? seancesUrl ?? '#'} target="_blank" rel="noopener">
+    <img class="soon-poster" src={poster} alt={`Affiche : ${title}`} loading="lazy" />
+  </a>
+  <p class="soon-date">{dateLabel}</p>
+  <p class="soon-title">{title}</p>
+  <p class="soon-meta">De {director} — {duration} min</p>
+  <div class="soon-age">
+    <span style="font-size:0.625rem">Dès</span>
+    <strong>{ageMin}</strong>
+    <span style="font-size:0.625rem">ans</span>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+---
+const newsletterUrl = "https://1922a34b.sibforms.com/serve/MUIFAJ0Rtgwl5W42In4u0XmHDqSKuoZFyU_inExWWe4h7qpimtHvTwTFHA8pqLxBUYpSc9DY5Y85brviP-ZIS1X1ZVj3KTtKgeJLCE8qa-uuwFTjgtEYIcuvwwBGAcXc0ElXS4iyvC24O1lH--hp8mPvxElt-9L9nuss7Gx3y8TrawjZY9jyMqjOtUXzOjhWF2Ui5jYUDKv-WG7c";
+---
+
+<header id="header" class="header">
+  <div class="container header__container">
+
+    <div class="header__logo">
+      <a href="/">
+        <img src="/images/logo.png" alt="Logo Agenda Cinéma des Enfants" />
+      </a>
+    </div>
+
+    <nav class="header__nav" id="main-nav">
+      <ul>
+        <li class="current">
+          <a href="/#intro">Accueil</a>
+        </li>
+        <li>
+          <a href="/#film-affiche">Films à l'affiche</a>
+        </li>
+        <li>
+          <a href="/#soon">Bientôt au cinéma</a>
+        </li>
+        <li>
+          <a href="https://www.littlefilmsfestival.com/" target="_blank" rel="noopener">
+            Little Films Festival
+          </a>
+        </li>
+      </ul>
+
+      <ul class="social">
+        <a
+          href={newsletterUrl}
+          class="btn-primary"
+          target="_blank"
+          rel="noopener"
+        >
+          S'inscrire à la newsletter
+        </a>
+      </ul>
+    </nav>
+
+    <button class="header__btn-mobile" id="menu-toggle" aria-label="Menu">
+      <span></span>
+    </button>
+
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    toggle.classList.toggle('is-current', open);
+  });
+</script>

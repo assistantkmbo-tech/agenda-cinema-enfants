@@ -1,0 +1,15 @@
+{
+  "title": "EN ROUTE",
+  "director": "Alexei Mironov et Yulia Matrosova, Harutyun Tumaghyan, Yuri Chaika-Pronin, Malin Neumann, Lucia Bulgheroni et Michele Greco, Hamid Karimian",
+  "duration": 40,
+  "ageMin": 4,
+  "synopsis": "Qu'il est bon de parcourir le monde ou simplement de découvrir son environnement… Ici ou là, nos petits aventuriers : une charmante escargote, une fratrie de lapereaux, un jeune dragon, deux sœurs hermines, un agneau et un petit garçon vont cheminer, naviguer, explorer et s'entraider. Chaque jour est un nouveau chemin pour grandir, s'émerveiller et s'ouvrir au monde.",
+  "status": "en_salle",
+  "dateLabel": "ACTUELLEMENT AU CINÉMA",
+  "coupDeCoeur": false,
+  "poster": "/images/poster-en-route.png",
+  "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=1000031073.html",
+  "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20629332&cfilm=1000031073.html",
+  "seancesUrl": "https://www.allocine.fr/seance/film-1000031073/",
+  "order": 2
+}
