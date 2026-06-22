@@ -1,9 +1,8 @@
-local_backend: true
-
 backend:
   name: github
-  repo: placeholder/placeholder
+  repo: assistantkmbo-tech/agenda-cinema-enfants
   branch: main
+  base_url: https://sveltia-cms-auth.assistantkmbo.workers.dev
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
