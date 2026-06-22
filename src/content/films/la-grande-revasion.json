@@ -5,11 +5,9 @@
   "ageMin": 4,
   "synopsis": "Avoir le trac avant de monter sur scène et s'inventer un monde, découvrir un objet bien mystérieux ou ce qui se cache dans une grande boîte : ces trois courts métrages éveilleront l'imaginaire et aideront les jeunes spectateurs à trouver la confiance en eux.",
   "status": "en_salle",
-  "dateLabel": "ACTUELLEMENT AU CINÉMA",
   "coupDeCoeur": false,
   "poster": "/images/poster-grande-revasion.webp",
   "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=1000035099.html",
   "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20630259&cfilm=1000035099.html",
-  "seancesUrl": "https://www.allocine.fr/seance/film-1000035099/",
-  "order": 3
+  "seancesUrl": "https://www.allocine.fr/seance/film-1000035099/"
 }

@@ -5,12 +5,9 @@
   "ageMin": 3,
   "synopsis": "Quatre ours, quatre contes, quatre saisons : qu'ils soient immenses, ensommeillés ou gourmands, les ours savent aussi être tendres. À leurs côtés, un oisillon malicieux, un petit lapin friand de noisettes ou encore un oiseau sentimental vivent des aventures extraordinaires. Tout doucement, ils découvrent le bonheur d'être ensemble.",
   "status": "bientot",
-  "dateLabel": "18 FÉVRIER",
-  "releaseDate": "2025-02-18",
   "coupDeCoeur": false,
   "poster": "/images/poster-ourse-oiseau.jpg",
   "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=1000031821.html",
   "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20630887&cfilm=1000031821.html",
-  "seancesUrl": "https://www.allocine.fr/seance/film-1000031821/",
-  "order": 5
+  "seancesUrl": "https://www.allocine.fr/seance/film-1000031821/"
 }

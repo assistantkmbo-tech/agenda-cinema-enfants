@@ -1,22 +1,56 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import FilmCard from '../components/FilmCard.astro';
 
 const allFilms = await getCollection('films');
-const sorted = allFilms.sort((a, b) => a.data.order - b.data.order);
+const ordreEntry = await getEntry('settings', 'ordre').catch(() => null);
+const siteEntry  = await getEntry('settings', 'site').catch(() => null);
 
-const enSalle = sorted.filter(f => f.data.status === 'en_salle');
-const bientot = sorted.filter(f => f.data.status === 'bientot');
+// Ordre depuis settings/ordre.json, sinon fallback sur le champ order
+const ordreList: string[] = ordreEntry?.data?.films ?? [];
+const filmMap = Object.fromEntries(allFilms.map(f => [f.id, f]));
 
-const heroFilm = enSalle[0];
-const heroImage = heroFilm?.data.heroImage ?? heroFilm?.data.poster;
+const sorted = ordreList.length
+  ? ordreList.map(slug => filmMap[slug]).filter(Boolean)
+  : allFilms.sort((a, b) => a.data.order - b.data.order);
+
+// Auto-promotion basée sur releaseDate au moment du build
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+function effectiveStatus(film: typeof sorted[0]) {
+  if (film.data.status === 'archive') return 'archive';
+  if (film.data.status === 'bientot' && film.data.releaseDate) {
+    if (new Date(film.data.releaseDate) <= today) return 'en_salle';
+  }
+  return film.data.status;
+}
+
+function getDateLabel(film: typeof sorted[0]) {
+  if (effectiveStatus(film) === 'en_salle') return 'ACTUELLEMENT AU CINÉMA';
+  if (film.data.releaseDate) {
+    const date = new Date(film.data.releaseDate + 'T12:00:00');
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }).toUpperCase();
+  }
+  return 'BIENTÔT';
+}
+
+const enSalle = sorted.filter(f => effectiveStatus(f) === 'en_salle');
+const bientot = sorted.filter(f => effectiveStatus(f) === 'bientot');
+
+const heroImage = siteEntry?.data?.heroImage ?? enSalle[0]?.data.poster;
+
+const introTitle    = siteEntry?.data?.introTitle    ?? 'LES FILMS POUR ENFANTS AU CINÉMA';
+const introSubtitle = siteEntry?.data?.introSubtitle ?? 'Inscrivez-vous à notre newsletter et soyez au courant des plus belles sorties pour vos enfants.';
+const newsletterUrl = siteEntry?.data?.newsletterUrl ?? '#';
+const soonTitle     = siteEntry?.data?.soonTitle     ?? 'Bientôt au cinéma';
 ---
 
 <Layout>
 
-  <Header />
+  <Header newsletterUrl={newsletterUrl} />
 
   <main
     style={heroImage ? `background-image: url('${heroImage}'); background-position: unset;` : ''}
@@ -25,13 +59,8 @@ const heroImage = heroFilm?.data.heroImage ?? heroFilm?.data.poster;
     <!-- INTRO -->
     <section id="intro" class="section-intro">
       <div class="container">
-        <h1 class="section-intro__title">
-          LES FILMS POUR ENFANTS AU CINÉMA
-        </h1>
-        <h2 class="section-intro__subtitle">
-          Inscrivez-vous à notre newsletter et soyez au courant
-          des plus belles sorties pour vos enfants.
-        </h2>
+        <h1 class="section-intro__title">{introTitle}</h1>
+        <h2 class="section-intro__subtitle">{introSubtitle}</h2>
       </div>
       <div class="container section-intro__inner">
         <div class="section-intro__infos"></div>
@@ -51,25 +80,8 @@ const heroImage = heroFilm?.data.heroImage ?? heroFilm?.data.poster;
                 duration={film.data.duration}
                 ageMin={film.data.ageMin}
                 synopsis={film.data.synopsis}
-                dateLabel={film.data.dateLabel}
-                status={film.data.status}
-                coupDeCoeur={film.data.coupDeCoeur}
-                poster={film.data.poster}
-                allocineUrl={film.data.allocineUrl}
-                trailerUrl={film.data.trailerUrl}
-                seancesUrl={film.data.seancesUrl}
-              />
-            ))}
-
-            {bientot.map(film => (
-              <FilmCard
-                title={film.data.title}
-                director={film.data.director}
-                duration={film.data.duration}
-                ageMin={film.data.ageMin}
-                synopsis={film.data.synopsis}
-                dateLabel={film.data.dateLabel}
-                status={film.data.status}
+                dateLabel={getDateLabel(film)}
+                status={effectiveStatus(film) as 'en_salle' | 'bientot'}
                 coupDeCoeur={film.data.coupDeCoeur}
                 poster={film.data.poster}
                 allocineUrl={film.data.allocineUrl}
@@ -86,7 +98,7 @@ const heroImage = heroFilm?.data.heroImage ?? heroFilm?.data.poster;
     <!-- BIENTÔT AU CINÉMA -->
     <section id="soon" class="soon">
       <div class="container">
-        <h1 class="title">Bientôt au cinéma</h1>
+        <h1 class="title">{soonTitle}</h1>
         <div class="movies">
           <div class="content">
             {bientot.map(film => (

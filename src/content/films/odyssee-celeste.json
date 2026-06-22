@@ -5,11 +5,8 @@
   "ageMin": 6,
   "synopsis": "Depuis son enfance, Céleste vit avec son meilleur ami, un robot, qui l'aide à accomplir son rêve : devenir astronaute ! Mais lorsqu'elle embarque pour sa première mission interstellaire, son robot se retrouve seul sur Terre et fait face à la solitude tandis que Céleste affronte des dangers imprévus. Leurs souvenirs communs leur donneront le courage et la force de lutter pour se retrouver.",
   "status": "bientot",
-  "dateLabel": "25 MARS",
-  "releaseDate": "2025-03-25",
   "coupDeCoeur": false,
   "poster": "/images/poster-celeste.jpg",
   "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=1000017785.html",
-  "seancesUrl": "https://www.allocine.fr/seance/film-1000017785/",
-  "order": 8
+  "seancesUrl": "https://www.allocine.fr/seance/film-1000017785/"
 }

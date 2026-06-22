@@ -8,17 +8,19 @@ const films = defineCollection({
     duration: z.number(),
     ageMin: z.number(),
     synopsis: z.string(),
-    status: z.enum(['en_salle', 'bientot']),
-    dateLabel: z.string(),
+    status: z.enum(['en_salle', 'bientot', 'archive']),
     releaseDate: z.string().optional(),
     coupDeCoeur: z.boolean().default(false),
     poster: z.string(),
-    heroImage: z.string().optional(),
     allocineUrl: z.string().optional(),
     trailerUrl: z.string().optional(),
     seancesUrl: z.string().optional(),
-    order: z.number().default(0),
   }),
 });
 
-export const collections = { films };
+const settings = defineCollection({
+  type: 'data',
+  schema: z.record(z.any()),
+});
+
+export const collections = { films, settings };

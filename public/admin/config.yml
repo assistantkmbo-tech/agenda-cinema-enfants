@@ -1,128 +1,85 @@
+local_backend: true
+
 backend:
   name: github
-  repo: TON_COMPTE_GITHUB/agenda-cinema-enfants   # ← à remplacer
+  repo: placeholder/placeholder
   branch: main
-  auth_endpoint: https://api.sveltia.app/auth      # auth hébergée par Sveltia, gratuite
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
-
 locale: fr
 
 collections:
+
+  # ─── FILMS ──────────────────────────────────────────────────────────────────
   - name: films
-    label: Films
+    label: "🎬 Films"
     label_singular: Film
     folder: src/content/films
     extension: json
     format: json
     create: true
     delete: true
-    slug: "{{slug}}"
     identifier_field: title
     summary: "{{title}} — {{dateLabel}}"
-    sortable_fields: [order, title, dateLabel]
-    view_groups:
-      - label: Statut
+    view_filters:
+      - label: "À l'affiche"
         field: status
-        pattern: "^en_salle$"
-      - label: Statut
+        pattern: en_salle
+      - label: "Bientôt"
         field: status
-        pattern: "^bientot$"
+        pattern: bientot
+      - label: "Archivés"
+        field: status
+        pattern: archive
 
     fields:
-      - label: Titre
-        name: title
-        widget: string
-        hint: "En MAJUSCULES, ex : OLIVIA"
+      - { label: "Titre",         name: title,      widget: string }
+      - { label: "Réalisateur",   name: director,   widget: string }
+      - { label: "Durée (min)",   name: duration,   widget: number, value_type: int }
+      - { label: "Âge minimum",   name: ageMin,     widget: number, value_type: int, hint: "Chiffre affiché dans le rond bleu" }
+      - { label: "Synopsis",      name: synopsis,   widget: text }
 
-      - label: Réalisateur(s)
-        name: director
-        widget: string
-        hint: "Prénom Nom (sans « De »)"
-
-      - label: Durée (minutes)
-        name: duration
-        widget: number
-        value_type: int
-        min: 1
-        max: 300
-
-      - label: Âge minimum
-        name: ageMin
-        widget: number
-        value_type: int
-        min: 1
-        max: 18
-        hint: "Ex : 3, 6, 8"
-
-      - label: Synopsis
-        name: synopsis
-        widget: text
-
-      - label: Statut
+      - label: "Statut"
         name: status
         widget: select
         options:
-          - { label: "Actuellement au cinéma", value: "en_salle" }
-          - { label: "Bientôt au cinéma", value: "bientot" }
-        default: bientot
+          - { label: "✅ À l'affiche",  value: en_salle }
+          - { label: "🔜 Bientôt",      value: bientot  }
+          - { label: "📦 Archivé",      value: archive  }
 
-      - label: Libellé date
-        name: dateLabel
-        widget: string
-        hint: "Affiché sur la carte. Ex : « ACTUELLEMENT AU CINÉMA » ou « 4 FÉVRIER »"
+      - { label: "Date de sortie", name: releaseDate, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false, hint: "Le mercredi de sortie — affiché automatiquement sur la carte (ex : 4 MARS) et bascule en À l'affiche après cette date" }
 
-      - label: Date de sortie
-        name: releaseDate
-        widget: datetime
-        format: YYYY-MM-DD
-        date_format: DD/MM/YYYY
-        time_format: false
-        required: false
-        hint: "Pour les films à venir seulement"
+      - { label: "Affiche",       name: poster,     widget: image }
 
-      - label: Coup de cœur
-        name: coupDeCoeur
-        widget: boolean
-        default: false
+      - { label: "Coup de cœur", name: coupDeCoeur, widget: boolean, default: false }
 
-      - label: Affiche (poster)
-        name: poster
-        widget: image
-        media_folder: /public/images/uploads
-        public_folder: /images/uploads
-        hint: "Format 3:4 recommandé (120×160 px minimum)"
+      - { label: "Lien Allociné",      name: allocineUrl, widget: string, required: false }
+      - { label: "Lien bande-annonce", name: trailerUrl,  widget: string, required: false }
+      - { label: "Lien séances",       name: seancesUrl,  widget: string, required: false }
 
-      - label: Image héro
-        name: heroImage
-        widget: image
-        media_folder: /public/images/uploads
-        public_folder: /images/uploads
-        required: false
-        hint: "Image de fond de la section intro (1920×1080 recommandé) — uniquement pour le 1er film en salle"
+  # ─── RÉGLAGES ───────────────────────────────────────────────────────────────
+  - name: settings
+    label: "⚙️ Réglages"
+    files:
 
-      - label: Lien Allociné (film)
-        name: allocineUrl
-        widget: string
-        required: false
-        hint: "https://www.allocine.fr/film/..."
+      - name: ordre
+        label: "🔀 Ordre des films"
+        file: src/content/settings/ordre.json
+        fields:
+          - label: "Glisser-déposer pour réordonner"
+            name: films
+            widget: list
+            allow_add: false
+            allow_delete: false
+            field: { label: Film, name: item, widget: string }
 
-      - label: Lien bande-annonce
-        name: trailerUrl
-        widget: string
-        required: false
-        hint: "https://www.allocine.fr/video/..."
-
-      - label: Lien séances
-        name: seancesUrl
-        widget: string
-        required: false
-        hint: "https://www.allocine.fr/seance/..."
-
-      - label: Ordre d'affichage
-        name: order
-        widget: number
-        value_type: int
-        min: 1
-        hint: "1 = premier affiché"
+      - name: site
+        label: "📝 Textes & liens"
+        file: src/content/settings/site.json
+        fields:
+          - { label: "Titre principal",    name: introTitle,    widget: string }
+          - { label: "Sous-titre",         name: introSubtitle, widget: text   }
+          - { label: "URL newsletter",     name: newsletterUrl, widget: string }
+          - { label: "Titre section Bientôt", name: soonTitle, widget: string }
+          - { label: "Image de fond (héro)", name: heroImage, widget: image, required: false, hint: "1920×1080 — image panoramique affichée en haut du site" }

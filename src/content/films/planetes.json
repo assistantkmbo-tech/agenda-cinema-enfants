@@ -5,12 +5,9 @@
   "ageMin": 8,
   "synopsis": "Quatre graines de pissenlit rescapées d'explosions nucléaires qui détruisent la Terre, se trouvent projetées dans le cosmos. Après s'être échouées sur une planète inconnue, elles partent à la quête d'un sol propice à la survie de leur espèce.",
   "status": "bientot",
-  "dateLabel": "11 MARS",
-  "releaseDate": "2025-03-11",
   "coupDeCoeur": false,
   "poster": "/images/poster-planetes.jpg",
   "allocineUrl": "https://www.allocine.fr/film/fichefilm_gen_cfilm=279261.html",
   "trailerUrl": "https://www.allocine.fr/video/player_gen_cmedia=20628843&cfilm=279261.html",
-  "seancesUrl": "https://www.allocine.fr/seance/film-279261/",
-  "order": 7
+  "seancesUrl": "https://www.allocine.fr/seance/film-279261/"
 }

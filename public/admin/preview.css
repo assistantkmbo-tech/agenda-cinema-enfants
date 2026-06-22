@@ -1,0 +1,31 @@
+@font-face { font-family: Futura; src: url('/fonts/futura-bold.woff2') format('woff2'); font-weight: 700; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: #b5bbff; font-family: Futura, sans-serif; min-height: 100vh; }
+
+.preview-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 3rem;
+  gap: 1.5rem;
+}
+
+.preview-poster {
+  max-width: 280px;
+  width: 100%;
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 40px rgba(0, 15, 71, .3);
+}
+
+.preview-title {
+  color: #000F47;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  letter-spacing: .05em;
+}
