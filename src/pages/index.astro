@@ -108,7 +108,7 @@ const soonTitle     = siteEntry?.data?.soonTitle     ?? 'Bientôt au cinéma';
                 rel="noopener"
               >
                 <div class="item">
-                  <span class="date">{film.data.dateLabel}</span>
+                  <span class="date">{getDateLabel(film)}</span>
                   <img
                     class="poster"
                     src={film.data.poster}
