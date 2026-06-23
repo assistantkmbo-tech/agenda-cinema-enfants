@@ -20,7 +20,7 @@ collections:
     create: true
     delete: true
     identifier_field: title
-    summary: "{{title}} — {{dateLabel}}"
+    summary: "{{title}} — {{status}} {{releaseDate}}"
     view_filters:
       - label: "À l'affiche"
         field: status
